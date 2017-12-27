@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=海天鹰系统信息
+Comment=查看系统信息
+Exec=/media/sonichy/job/HY/Linux/Qt/HTYSI/HTYSI
+Icon=/media/sonichy/job/HY/Linux/Qt/HTYSI/icon.png
+Path=/media/sonichy/job/HY/Linux/Qt/HTYSI
+Terminal=false
+Type=Application
+MimeType=
+Categories=
