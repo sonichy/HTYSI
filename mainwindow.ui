@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="res.qrc">
-    <normaloff>:/icon.png</normaloff>:/icon.png</iconset>
+    <normaloff>:/icon/icon.png</normaloff>:/icon/icon.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">#listWidget { background: #E8F3F7;  font-size: 20px;}
@@ -40,7 +40,7 @@
      <number>0</number>
     </property>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,4">
+     <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,4,0">
       <property name="spacing">
        <number>0</number>
       </property>
@@ -53,6 +53,25 @@
          <font>
           <pointsize>15</pointsize>
          </font>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_brand">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>100</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>100</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
         </property>
        </widget>
       </item>
@@ -78,7 +97,7 @@
   <action name="actionRefresh">
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/refresh.png</normaloff>:/refresh.png</iconset>
+     <normaloff>:/icon/refresh.png</normaloff>:/icon/refresh.png</iconset>
    </property>
    <property name="text">
     <string>refresh</string>

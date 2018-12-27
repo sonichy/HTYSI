@@ -1,6 +1,14 @@
 <RCC>
     <qresource prefix="/">
-        <file>icon.png</file>
-        <file>refresh.png</file>
+        <file>icon/icon.png</file>
+        <file>icon/refresh.png</file>
+        <file>icon/intel.png</file>
+        <file>icon/celeron.png</file>
+        <file>icon/pentium.png</file>
+        <file>icon/deepin.jpg</file>
+        <file>icon/realtek.gif</file>
+        <file>icon/radeon.jpg</file>
+        <file>icon/NVIDIA.svg</file>
+        <file>icon/AMD.png</file>
     </qresource>
 </RCC>
