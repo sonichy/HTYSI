@@ -40,6 +40,11 @@ void MainWindow::getCPUInfo()
     cpu_bugs = bugsline.first().split(":").at(1);
     QStringList flagsline = lines.filter("flags");
     cpu_flags = flagsline.first().split(":").at(1);
+
+    file.setFileName("/sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies");
+    file.open(QIODevice::ReadOnly);
+    cpu_freqs = file.readAll();
+    file.close();
 }
 
 void MainWindow::getGPUInfo()
@@ -160,13 +165,13 @@ void MainWindow::currentRowChange(int row)
         ui->textBrowser->setText("系统：" + QSysInfo::prettyProductName() + "\n处理器：" + cpu_model + "\n显卡：" + gpu_vendor + gpu_model + "\n声卡：" + sound_vendor + sound_model);
         break;
     case 1:
-        ui->textBrowser->setText("用户名：" + qgetenv("USER") + "\n核心类型：" + QSysInfo::kernelType() + "\n核心版本：" + QSysInfo::kernelVersion() + "\n发行版：" + QSysInfo::prettyProductName() + "\n发行版本号：" + QSysInfo::productVersion());
+        ui->textBrowser->setText("主机名：" + QSysInfo::machineHostName() + "\n用户名：" + qgetenv("USER") + "\n内核：" + QSysInfo::kernelType() + " " + QSysInfo::kernelVersion() + "\n架构：" + QSysInfo::currentCpuArchitecture() + "\n版本名称：" + QSysInfo::prettyProductName() + "\n版本号：" + QSysInfo::productVersion());
         if(QSysInfo::prettyProductName().contains("Deepin")){
             ui->label_brand->setPixmap(QPixmap(":/icon/deepin.jpg").scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation));
         }
         break;
     case 2:
-        ui->textBrowser->setText("型号：" + cpu_model + "\n核心数：" + cpu_core + "\n缓存：" + cpu_cache + "\n架构：" + QSysInfo::currentCpuArchitecture() + "\n特征：" + cpu_flags + "\n缺陷：" + cpu_bugs);
+        ui->textBrowser->setText("型号：" + cpu_model + "\n核心数：" + cpu_core + "\n缓存：" + cpu_cache + "\n架构：" + QSysInfo::currentCpuArchitecture() + "\n特征：" + cpu_flags + "\n缺陷：" + cpu_bugs + "\n工作频率(KHz)：" + cpu_freqs);
         if(cpu_model.contains("Celeron")){
             ui->label_brand->setPixmap(QPixmap(":/icon/celeron.png").scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation));
         }else if(cpu_model.contains("Pentium")){
