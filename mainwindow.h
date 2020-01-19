@@ -19,6 +19,8 @@ public:
 private:
     Ui::MainWindow *ui;
     QString cpu_model, cpu_core, cpu_cache, cpu_bugs, cpu_flags, cpu_freqs, gpu_model, gpu_vendor, gpu_width, gpu_clock, gpu_driver, sound_model, sound_vendor, sound_width, sound_clock, sound_driver, npu_model, npu_vendor, npu_capacity, npu_width, npu_clock, software;
+    QWidget *widget_screen_test;
+    int stc;
     void getCPUInfo();
     void getGPUInfo();
     void getSoundInfo();
@@ -29,6 +31,9 @@ private:
 private slots:
     void currentRowChange(int row);
     void on_actionRefresh_triggered();
+    void on_actionScreenTest_triggered();
+    void screenTest();
+    void exitScreenTest();
 
 };
 

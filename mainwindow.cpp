@@ -4,6 +4,7 @@
 #include <QFile>
 #include <QProcess>
 #include <QDebug>
+#include <QShortcut>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -58,21 +59,17 @@ void MainWindow::getGPUInfo()
         if (SL.at(i).contains("product:")) {
             gpu_model = SL.at(i);
             gpu_model.remove("product:");
-        }
-        if(SL.at(i).contains("vendor:")) {
+        }else if(SL.at(i).contains("vendor:")) {
             gpu_vendor = SL.at(i);
             gpu_vendor.remove("vendor:");
             gpu_vendor.remove("Corporation");
-        }
-        if(SL.at(i).contains("width:")) {
+        }else if(SL.at(i).contains("width:")) {
             gpu_width = SL.at(i);
             gpu_width.remove("width:");
-        }
-        if(SL.at(i).contains("clock:")) {
+        }else if(SL.at(i).contains("clock:")) {
             gpu_clock = SL.at(i);
             gpu_clock.remove("clock:");
-        }
-        if(SL.at(i).contains("driver=")) {
+        }else if(SL.at(i).contains("driver=")) {
             QStringList SL1 = SL.at(i).split(QRegExp("\\s{1,}")); // 第一个\表示转义字符，\s表示空格，｛1，｝表示一个以上
             //qDebug() << SL1;
             for(int j=0; j<SL1.size(); j++){
@@ -96,20 +93,16 @@ void MainWindow::getSoundInfo()
         if (SL.at(i).contains("product:")) {
             sound_model = SL.at(i);
             sound_model.remove("product:");
-        }
-        if(SL.at(i).contains("vendor:")) {
+        }else if(SL.at(i).contains("vendor:")) {
             sound_vendor = SL.at(i);
             sound_vendor.remove("vendor:");
-        }
-        if(SL.at(i).contains("width:")) {
+        }else if(SL.at(i).contains("width:")) {
             sound_width = SL.at(i);
             sound_width.remove("width:");
-        }
-        if(SL.at(i).contains("clock:")) {
+        }else if(SL.at(i).contains("clock:")) {
             sound_clock = SL.at(i);
             sound_clock.remove("clock:");
-        }
-        if(SL.at(i).contains("driver=")) {
+        }else if(SL.at(i).contains("driver=")) {
             QStringList SL1 = SL.at(i).split(QRegExp("\\s{1,}")); // 第一个\表示转义字符，\s表示空格，｛1，｝表示一个以上
             //qDebug() << SL1;
             for(int j=0; j<SL1.size(); j++){
@@ -231,4 +224,42 @@ void MainWindow::refresh()
 void MainWindow::on_actionRefresh_triggered()
 {
     refresh();
+}
+
+void MainWindow::on_actionScreenTest_triggered()
+{
+    widget_screen_test = new QWidget;
+    widget_screen_test->setWindowFlags(Qt::WindowStaysOnTopHint);
+    widget_screen_test->showFullScreen();
+    connect(new QShortcut(QKeySequence(Qt::Key_Space), widget_screen_test), SIGNAL(activated()), this, SLOT(screenTest()));
+    connect(new QShortcut(QKeySequence(Qt::Key_Escape), widget_screen_test), SIGNAL(activated()), this, SLOT(exitScreenTest()));
+    stc = -1;
+    screenTest();
+}
+
+void MainWindow::screenTest()
+{
+    stc++;
+    //qDebug() << stc;
+    switch(stc){
+    case 0:
+        widget_screen_test->setStyleSheet("background-color: rgb(255, 255, 255)");
+        break;
+    case 1:
+        widget_screen_test->setStyleSheet("background-color: rgb(255, 0, 0)");
+        break;
+    case 2:
+        widget_screen_test->setStyleSheet("background-color: rgb(0, 255, 0)");
+        break;
+    case 3:
+        widget_screen_test->setStyleSheet("background-color: rgb(0, 0, 255)");
+        break;
+    }
+    if(stc>3)
+        widget_screen_test->close();
+}
+
+void MainWindow::exitScreenTest()
+{
+    widget_screen_test->close();
 }

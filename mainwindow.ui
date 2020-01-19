@@ -93,6 +93,7 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actionRefresh"/>
+   <addaction name="actionScreenTest"/>
   </widget>
   <action name="actionRefresh">
    <property name="icon">
@@ -104,6 +105,17 @@
    </property>
    <property name="toolTip">
     <string>刷新</string>
+   </property>
+  </action>
+  <action name="actionScreenTest">
+   <property name="icon">
+    <iconset theme="display"/>
+   </property>
+   <property name="text">
+    <string>显示测试</string>
+   </property>
+   <property name="toolTip">
+    <string>显示测试</string>
    </property>
   </action>
  </widget>
